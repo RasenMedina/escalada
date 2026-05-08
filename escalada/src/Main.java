@@ -77,14 +77,7 @@ public class Main {
                         break;
 
                     case 2:
-                        int idEscola = InputReader.llegirInt("Id de l'escola per modificar");
-
-                        String nomMod = InputReader.llegir("Nom de l'escola");
-                        String llocMod = InputReader.llegir("Lloc de l'escole");
-                        String aprMod = InputReader.llegir("Aproximacio de l'escole");
-                        String popMod = InputReader.llegir("Lloc de l'escole");
-
-                        Escola escolaModificat = new Escola(idEscola,nomMod,llocMod,aprMod,popMod);
+                        Escola escolaModificat = Vista.modificarEscola();
                         controller.actualitzar(escolaModificat);
 
                     case 3:
@@ -125,17 +118,7 @@ public class Main {
                         break;
 
                     case 2:
-                        int id = InputReader.llegirInt("ID del sector a modifier : ");
-                        int idEscola = InputReader.llegirInt("ID de l'escola a modifier : ");
-
-                        String nomNou = InputReader.llegir("Nou nom : ");
-                        double longiNou = InputReader.llegirDouble("Nova longitud : ");
-                        double latiNou = InputReader.llegirDouble("Nova latitud : ");
-                        String aproxNou = InputReader.llegir("Nova aproximació : ");
-                        String popuNou = InputReader.llegir("Nova popularitat : ");
-                        boolean gel = InputReader.llegirBoolean("És de gel? (true/false) : ");
-
-                        Sector sectorEdit = new Sector(id, idEscola, nomNou, longiNou, latiNou, aproxNou, popuNou, gel);
+                        Sector sectorEdit = Vista.modificarSector();
                         controller.actualitzar(sectorEdit);
 
                     case 3:
