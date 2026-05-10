@@ -2,6 +2,7 @@ CREATE DATABASE escalada;
 
 USE escalada;
 
+-- creació de tables ===============================================================================================================================================================
 DROP TABLE IF EXISTS escoles;
 CREATE TABLE escoles (
 	id_escola INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -101,6 +102,61 @@ CREATE TABLE assoliments (
         ON UPDATE CASCADE
 );
 
+-- INDEX ===============================================================================================================================================================
+-- ESCOLES --------------------------------------------------------------------
+-- FK -> escoles
+CREATE INDEX idx_sector_escola ON sectors(id_escola);
+-- Cerca per nom de sector
+CREATE INDEX idx_sector_nom ON sectors(nom_sector);
+
+
+-- VIES -----------------------------------------------------------------------
+-- FK -> sectors
+CREATE INDEX idx_via_sector ON vies(id_sector);
+
+-- FK -> escaladors
+CREATE INDEX idx_via_escalador ON vies(id_escalador_creador);
+
+-- Cerca per estat
+CREATE INDEX idx_via_estat ON vies(estat);
+
+-- Cerca per tipus de via
+CREATE INDEX idx_via_tipus ON vies(tipus_via);
+
+-- Cerca per nom
+CREATE INDEX idx_via_nom ON vies(nom);
+
+-- 
+-- LLARGS --------------------------------------------------------------------
+-- FK -> vies
+CREATE INDEX idx_llarg_via ON llargs(id_via);
+
+-- Cerca per dificultat
+CREATE INDEX idx_llarg_dificultat ON llargs(grau_dificultat);
+
+-- Cerca per ordre dins la via
+CREATE INDEX idx_llarg_ordre ON llargs(ordre);
+
+-- ESCALADORS -------------------------------------------------------------------
+CREATE UNIQUE INDEX idx_escalador_dni ON escaladors(dni);
+
+-- Cerca per nom
+CREATE INDEX idx_escalador_nom ON escaladors(nom);
+
+-- Cerca per estil preferit
+CREATE INDEX idx_escalador_estil ON escaladors(estil_preferit);
+
+-- ASSOLIMENTS -------------------------------------------------------------------
+-- FK -> escalador
+CREATE INDEX idx_assoliment_escalador ON assoliments(id_escalador);
+
+-- FK -> via
+CREATE INDEX idx_assoliment_via ON assoliments(id_via);
+
+-- Cerca per data
+CREATE INDEX idx_assoliment_data ON assoliments(data);
+
+-- INSERTS ===============================================================================================================================================================
 -- INSERTS ESCOLES
 INSERT INTO escoles (nom, lloc, popularitat, aproximacio) VALUES
 ('Siurana', 'Tarragona', 'alta', 'Accés per carretera principal'),
@@ -140,7 +196,8 @@ INSERT INTO escaladors (dni, nom, cognoms, alias, data_naix, estil_preferit) VAL
 ('90123456I', 'Oriol', 'Puig', 'Ori', '1994-08-14', 'gel'),
 ('01234567J', 'Eva', 'Ferrer', 'Evix', '2002-06-09', 'esportiva');
 
--- INSERTS VIES
+
+-- INSERTS VIES 
 INSERT INTO vies (
 id_sector, id_escalador_creador, nom, data_creacio, orientacio,
 ancoratge, tipus_roca, tipus_via, estat,
