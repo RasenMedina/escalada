@@ -1,17 +1,34 @@
 package view;
 
+/**
+ * Classe encarregada de mostrar tots els menús de l'aplicació.
+ *
+ * Aquesta classe pertany a la capa View del patró MVC i
+ * centralitza totes les opcions de navegació disponibles
+ * per a l'usuari.
+ *
+ * Cada mètode mostra un menú específic relacionat amb
+ * una entitat o funcionalitat del sistema.
+ *
+ * Projecte: Aplicació Escalada JDBC
+ * Autors: Hajar Rahmani i Rasen Medinia
+ */
 public class Menus {
+
+    /**
+     * Mostra el menú principal de l'aplicació.
+     */
     // --- MENU PRINCIPAL ---
     public static void menuPrincipal() {
         String[] opcions = {
-                "1.  Gestionar Escoles",
-                "2.  Gestionar Sectors",
-                "3.  Gestionar Vies",
-                "4.  Gestionar Escaladors",
-                "5.  Gestionar Llargs",
-                "6.  Consultes Avançades",
+                "Gestionar Escoles",
+                "Gestionar Sectors",
+                "Gestionar Vies",
+                "Gestionar Escaladors",
+                "Gestionar Llargs",
+                "Consultes Avançades",
 
-                "0.  Sortir"
+                "Sortir"
         };
 
         Vista.titol("MENU PRINCIPAL - APLICACIÓ ESCALADA");
@@ -20,46 +37,52 @@ public class Menus {
 
     /*public static void menuCRUD(String entitat) {
         String[] opcions = {
-                "1.  Crear " + entitat,
-                "2.  Modificar " + entitat,
-                "3.  Llistar un (per ID)",
-                "4.  Llistar tots els " + entitat + "s",
-                "5.  Eliminar " + entitat,
+                "Crear " + entitat,
+                "Modificar " + entitat,
+                "Llistar un (per ID)",
+                "Llistar tots els " + entitat + "s",
+                "Eliminar " + entitat,
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
 
         Vista.titol("GESTIÓ DE " + entitat.toUpperCase());
         Vista.mostrarMenu(opcions);
     }*/
 
-    // --- MENUS ESPECÍFICS (Opcionals si es vol personalitzar el CRUD) ---
+    /**
+     *  Mostra el menú de gestió d'escoles.
+     */
+    // --- MENUS ESPECÍFICS (personalitzar el CRUD) ---
     public static void menuEscoles() {
         String[] opcions = {
-                "1.  Crear Escola",
-                "2.  Modificar Escola",
-                "3.  Llistar una Escola (per ID)",
-                "4.  Llistar totes les Escoles",
-                "5.  Eliminar Escola",
-                "6.  Veure vies disponibles de l'escola", // Requeriment específic
-                "7.  Veure les vies més llargues d'una escola", // Requeriment específic
+                "Crear Escola",
+                "Modificar Escola",
+                "Llistar una Escola (per ID)",
+                "Llistar totes les Escoles",
+                "Eliminar Escola",
+                "Veure vies disponibles de l'escola", // Requeriment específic
+                "Veure les vies més llargues d'una escola", // Requeriment específic
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
         Vista.titol("GESTIÓ D'ESCOLES");
         Vista.mostrarMenu(opcions);
     }
 
+    /**
+     *  Mostra el menú de gestió de sectors.
+     */
     public static void menuSectors() {
         String[] opcions = {
-                "1.  Crear Sector",
-                "2.  Modificar Sector",
-                "3.  Llistar un Sector (per ID)",
-                "4.  Llistar tots els Sectors",
-                "5.  Eliminar Sector",
-                "6.  Mostrar sectors amb més de X vies",    // Requeriment avançat
+                "Crear Sector",
+                "Modificar Sector",
+                "Llistar un Sector (per ID)",
+                "Llistar tots els Sectors",
+                "Eliminar Sector",
+                "Mostrar sectors amb més de X vies",    // Requeriment avançat
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
 
         Vista.titol("GESTIÓ DE SECTORS");
@@ -67,67 +90,89 @@ public class Menus {
     }
 
 
+    /**
+     *  Mostra el menú de gestió de vies.
+     */
     public static void menuVies() {
         String[] opcions = {
-                "1.  Crear Via",
-                "2.  Modificar Via",
-                "3.  Llistar una Via (per ID)",
-                "4.  Llistar totes les Vies",
-                "5.  Eliminar Via",
-                "6.  Cercar vies per estat", // Requeriment específic
+                "Crear Via",
+                "Modificar Via",
+                "Llistar una Via (per ID)",
+                "Llistar totes les Vies",
+                "Eliminar Via",
+                "Cercar vies per estat", // Requeriment específic
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
         Vista.titol("GESTIÓ DE VIES");
         Vista.mostrarMenu(opcions);
     }
 
+
+    /**
+     *  Mostra el menú de gestió d'escaladors.
+     */
     public static void menuEscaladors() {
         String[] opcions = {
-                "1.  Crear Escalador",
-                "2.  Modificar Escalador",
-                "3.  Llistar un Escalador (per ID)",
-                "4.  Llistar tots els Escaladors",
-                "5.  Eliminar Escalador",
-                "6.  Mostrar escaladors amb el mateix nivell", // Requeriment avançat
-                "7.  Filtrar per estil preferit",              // Basat en l'atribut de la BD
+                "Crear Escalador",
+                "Modificar Escalador",
+                "Llistar un Escalador (per ID)",
+                "Llistar tots els Escaladors",
+                "Eliminar Escalador",
+                "Mostrar escaladors amb el mateix nivell", // Requeriment avançat
+                "Filtrar per estil preferit",              // Basat en l'atribut de la BD
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
 
         Vista.titol("GESTIÓ D'ESCALADORS");
         Vista.mostrarMenu(opcions);
     }
 
+
+    /**
+     *  Mostra el menú de gestió de llargs.
+     */
     public static void menuLlargs() {
         String[] opcions = {
-                "1.  Crear Llarg",
-                "2.  Modificar Llarg",
-                "3.  Llistar un Llarg (per ID)",
-                "4.  Llistar tots els Llargs",
-                "5.  Eliminar Llarg",
-                "6.  Veure llargs d'una Via",
+                "Crear Llarg",
+                "Modificar Llarg",
+                "Llistar un Llarg (per ID)",
+                "Llistar tots els Llargs",
+                "Eliminar Llarg",
+                "Veure llargs d'una Via",
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
 
         Vista.titol("GESTIÓ DE LLARGS");
         Vista.mostrarMenu(opcions);
     }
 
+
+    /**
+     * Mostra el menú de consultes avançades.
+     *
+     * Conté consultes complexes relacionades amb:
+     * - vies disponibles
+     * - dificultats
+     * - restriccions
+     * - estadístiques
+     * - filtres avançats
+     */
     // --- MENU CONSULTES AVANÇADES ---
     public static void menuConsultesAvancades() {
         String[] opcions = {
-                "1.  Vies disponibles d'una escola determinada",
-                "2.  Cercar vies per rang de dificultat",
-                "3.  Cercar vies segons estat (Apte, Construcció, Tancada)",
-                "4.  Consultar escoles amb restriccions actives",
-                "5.  Sectors amb més de X vies disponibles",
-                "6.  Escaladors amb el mateix nivell màxim assolit",
-                "7.  Vies que han passat a 'Apte' recentment",
-                "8.  Les vies més llargues d'una escola",
+                "Vies disponibles d'una escola determinada",
+                "Cercar vies per rang de dificultat",
+                "Cercar vies segons estat (Apte, Construcció, Tancada)",
+                "Consultar escoles amb restriccions actives",
+                "Sectors amb més de X vies disponibles",
+                "Escaladors amb el mateix nivell màxim assolit",
+                "Vies que han passat a 'Apte' recentment",
+                "Les vies més llargues d'una escola",
 
-                "0.  Tornar al menú principal"
+                "Tornar al menú principal"
         };
 
         Vista.titol("CONSULTES I FILTRES AVANÇATS");
