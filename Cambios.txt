@@ -1,0 +1,11 @@
+-----------------------------------------------------------------------------------------------------------------
+CAMBIOS
+-----------------------------------------------------------------------------------------------------------------
+
+RASEN - fin de semana 9-10 MAYO
+
+Añadido grau de dificultat en diagram_er y en esquema relacional
+actualizado y finalizado el README
+actualizado el model
+quitada la carpeta escalada y he puesto directamente el src
+He cambiado el nombre del repositoria: de PracticaPersistencia a escalada

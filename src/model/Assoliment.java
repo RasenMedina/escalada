@@ -10,12 +10,14 @@ public class Assoliment {
 
     /** ATRIBUTS */
 
-    /** id que identifica l'escalador (NN) */
+    /** id que identifica l'escalador (PK) */
+    private int idAssoliment;
+    /** id que identifica l'escalador (FK + NN) */
     private int idEscalador;
-    /** id que identifica la via (NN) */
+    /** id que identifica la via (FK + NN) */
     private int idVia;
     /** data de l'assoliment */
-    private LocalDate data;
+    private LocalDate dataAssoliment;
 
     /**
      * Constructor buit
@@ -26,27 +28,35 @@ public class Assoliment {
     /**
      * Constructor complet
      */
-    public Assoliment(int idEscalador, int idVia, LocalDate data) {
-        inicialitzar(idEscalador, idVia, data);
+    public Assoliment(int idAssoliment, int idEscalador, int idVia, LocalDate dataAssoliment) {
+        inicialitzar(idAssoliment, idEscalador, idVia, dataAssoliment);
     }
 
     /**
      * Constructor còpia
      */
     public Assoliment(Assoliment altre) {
-        inicialitzar(altre.idEscalador, altre.idVia, altre.data);
+        inicialitzar(altre.idAssoliment, altre.idEscalador, altre.idVia, altre.dataAssoliment);
     }
 
     /**
      * Mètode d'inicialització
      */
-    private void inicialitzar(int idEscalador, int idVia, LocalDate data) {
+    private void inicialitzar(int idAssoliment, int idEscalador, int idVia, LocalDate dataAssoliment) {
+        setIdAssoliment(idAssoliment);
         setIdEscalador(idEscalador);
         setIdVia(idVia);
-        setData(data);
+        setDataAssoliment(dataAssoliment);
     }
 
     /** SETTERS amb validació */
+
+    public void setIdAssoliment (int idAssoliment) {
+        if (idAssoliment < 0)
+            throw new IllegalArgumentException("ID assoliment no vàlid");
+        this.idAssoliment = idAssoliment;
+    }
+
 
     public void setIdEscalador(int idEscalador) {
         if (idEscalador < 0)
@@ -60,13 +70,17 @@ public class Assoliment {
         this.idVia = idVia;
     }
 
-    public void setData(LocalDate data) {
-        if (data != null && data.isAfter(LocalDate.now()))
+    public void setDataAssoliment(LocalDate dataAssoliment) {
+        if (dataAssoliment != null && dataAssoliment.isAfter(LocalDate.now()))
             throw new IllegalArgumentException("Data d'assoliment no vàlida");
-        this.data = data;
+        this.dataAssoliment = dataAssoliment;
     }
 
     /** GETTERS */
+
+    public int getIdAssoliment() {
+        return idAssoliment;
+    }
 
     public int getIdEscalador() {
         return idEscalador;
@@ -76,16 +90,17 @@ public class Assoliment {
         return idVia;
     }
 
-    public LocalDate getData() {
-        return data;
+    public LocalDate getDataAssoliment() {
+        return dataAssoliment;
     }
 
     /** toString */
     @Override
     public String toString() {
-        return  "Escalador: " + idEscalador + "\n" +
+        return  "Assoliment: " + idAssoliment + "\n" +
+                "Escalador: " + idEscalador + "\n" +
                 "Via: " + idVia + "\n" +
-                "Data: " + data + "\n";
+                "Data: " + dataAssoliment + "\n";
     }
 
     /** equals */
@@ -94,12 +109,12 @@ public class Assoliment {
         if (this == o) return true;
         if (!(o instanceof Assoliment)) return false;
         Assoliment that = (Assoliment) o;
-        return (idEscalador == that.idEscalador) && (idVia == that.idVia);
+        return idAssoliment == that.idAssoliment;
     }
 
     /** hashCode */
     @Override
     public int hashCode() {
-        return Objects.hash(idEscalador, idVia);
+        return Objects.hash(idAssoliment);
     }
 }

@@ -9,9 +9,9 @@ public class Sector {
 
     /** ATRIBUTS */
 
-    /** id que identifica el sector (NN) */
+    /** id que identifica el sector (PK) */
     private int idSector;
-    /** id de l'escola a la qual pertany el sector (NN) */
+    /** id de l'escola a la qual pertany el sector (FK + NN) */
     private int idEscola;
     /** nom del sector (NN) */
     private String nom;

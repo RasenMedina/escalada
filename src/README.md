@@ -14,7 +14,7 @@
 ## Esquema Relacional
 
 <p align="center">
-  <img src="images/esquemaR.png" width="800">
+  <img src="images/esquema_relacional.png" width="800">
 </p>
 
 ---

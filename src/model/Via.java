@@ -10,13 +10,13 @@ public class Via {
 
     /** ATRIBUTS */
 
-    /** id que identifica la Via (NN) */
+    /** id que identifica la Via (PK) */
     private int idVia;
-    /** id del sector al qual pertany la via (NN) */
+    /** id del sector al qual pertany la via (FK + NN) */
     private int idSector;
     /** nom de la via (NN) */
     private String nom;
-    /** id de l'escalador que ha creat la via (NN) */
+    /** id de l'escalador que ha creat la via (FK + NN) */
     private int idEscaladorCreador;
     /** data de creació de la via */
     private LocalDate dataCreacio;
@@ -24,7 +24,7 @@ public class Via {
     private String tipusVia;
     /** [N,NE,NO,SE,SO,E,O,S] */
     private String orientacio;
-    /** [4,4+,5,5+,6a,6a+,6b,6b+,6c,6c+,7a,7a+,7b,7b+,7c,7c+,8a,8a+,8b]  */
+    /**  [4,4+,5,5+,6a,6a+,6b,6b+,6c,6c+,7a,7a+,7b,7b+,7c,7c+,8a,8a+,8b,8b+,8c,8c+,9a,9a+,9b,9b+,9c,9c+] */
     private String grauDificultat;
     /** [conglomerat, granit, calcaria, arenisca, altres] */
     private String tipusRoca;
@@ -33,7 +33,7 @@ public class Via {
     /** [Apte, construcció, tancada] (NN) */
     private String estat;
     /** breu descripció de per què no està apte */
-    private String restriccions;
+    private String motiuNoApte;
     /** data a partir de la qual la via no està apte */
     private LocalDate dataIniciNoApte;
     /** data fins a la qual la via no està apte */
@@ -48,21 +48,21 @@ public class Via {
     /**
      * Constructor complet
      */
-    public Via(int idVia, int idSector, String nom, int idEscaladorCreador, LocalDate dataCreacio, String tipusVia, String orientacio, String grauDificultat, String tipusRoca, String ancoratge, String estat, String restriccions, LocalDate dataIniciNoApte, LocalDate dataFiNoApte) {
-        inicialitzar(idVia, idSector, nom, idEscaladorCreador, dataCreacio, tipusVia, orientacio, grauDificultat, tipusRoca, ancoratge, estat, restriccions, dataIniciNoApte, dataFiNoApte);
+    public Via(int idVia, int idSector, String nom, int idEscaladorCreador, LocalDate dataCreacio, String tipusVia, String orientacio, String grauDificultat, String tipusRoca, String ancoratge, String estat, String motiuNoApte, LocalDate dataIniciNoApte, LocalDate dataFiNoApte) {
+        inicialitzar(idVia, idSector, nom, idEscaladorCreador, dataCreacio, tipusVia, orientacio, grauDificultat, tipusRoca, ancoratge, estat, motiuNoApte, dataIniciNoApte, dataFiNoApte);
     }
 
     /**
      * Constructor còpia
      */
     public Via(Via altre) {
-        inicialitzar(altre.idVia, altre.idSector, altre.nom, altre.idEscaladorCreador, altre.dataCreacio, altre.tipusVia, altre.orientacio, altre.grauDificultat, altre.tipusRoca, altre.ancoratge, altre.estat, altre.restriccions, altre.dataIniciNoApte, altre.dataFiNoApte);
+        inicialitzar(altre.idVia, altre.idSector, altre.nom, altre.idEscaladorCreador, altre.dataCreacio, altre.tipusVia, altre.orientacio, altre.grauDificultat, altre.tipusRoca, altre.ancoratge, altre.estat, altre.motiuNoApte, altre.dataIniciNoApte, altre.dataFiNoApte);
     }
 
     /**
      * Mètode d'inicialització
      */
-    private void inicialitzar(int idVia, int idSector, String nom, int idEscaladorCreador, LocalDate dataCreacio, String tipusVia, String orientacio, String grauDificultat, String tipusRoca, String ancoratge, String estat, String restriccions, LocalDate dataIniciNoApte, LocalDate dataFiNoApte){
+    private void inicialitzar(int idVia, int idSector, String nom, int idEscaladorCreador, LocalDate dataCreacio, String tipusVia, String orientacio, String grauDificultat, String tipusRoca, String ancoratge, String estat, String motiuNoApte, LocalDate dataIniciNoApte, LocalDate dataFiNoApte){
         setIdVia(idVia);
         setIdSector(idSector);
         setNom(nom);
@@ -74,7 +74,7 @@ public class Via {
         setTipusRoca(tipusRoca);
         setAncoratge(ancoratge);
         setEstat(estat);
-        setRestriccions(restriccions);
+        setMotiuNoApte(motiuNoApte);
         setDataIniciNoApte(dataIniciNoApte);
         setDataFiNoApte(dataFiNoApte);
     }
@@ -233,10 +233,10 @@ public class Via {
         this.estat = e;
     }
 
-    public void setRestriccions(String restriccions) {
-        if (restriccions != null && restriccions.isBlank())
+    public void setMotiuNoApte(String motiuNoApte) {
+        if (motiuNoApte != null && motiuNoApte.isBlank())
             throw new IllegalArgumentException("Restricció no vàlida");
-        this.restriccions = restriccions;
+        this.motiuNoApte = motiuNoApte;
     }
 
     public void setDataIniciNoApte(LocalDate dataIniciNoApte) {
@@ -297,8 +297,8 @@ public class Via {
         return estat;
     }
 
-    public String getRestriccions() {
-        return restriccions;
+    public String getMotiuNoApte() {
+        return motiuNoApte;
     }
 
     public LocalDate getDataIniciNoApte() {

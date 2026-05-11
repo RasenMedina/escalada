@@ -9,11 +9,11 @@ public class Escola {
 
     /** ATRIBUTS */
 
-    /** id que identifica l'escola (NN) */
+    /** id que identifica l'escola (PK) */
     private int idEscola;
-    /** nom de l'escola (NN) */
+    /** nom de l'escola (UNIQUE + NN) */
     private String nom;
-    /** població */
+    /** població on es troba l'escola */
     private String lloc;
     /** breu descripció de com arribar */
     private String aproximacio;
@@ -85,7 +85,7 @@ public class Escola {
         String p = popularitat.toLowerCase();
 
         if (!p.equals("baixa") && !p.equals("mitjana")
-               && !p.equals("alta")) {
+                && !p.equals("alta")) {
             throw new IllegalArgumentException("Popularitat no vàlida");
         }
 

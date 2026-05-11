@@ -10,22 +10,20 @@ public class Escalador {
 
     /** ATRIBUTS */
 
-    /** id que identifica l'escalador (NN) */
+    /** id que identifica l'escalador (PK) */
     private int idEscalador;
-    /** DNI de l'escalador (NN) */
+    /** DNI de l'escalador (UNIQUE + NN) */
     private String dni;
     /** nom de l'escalador (NN) */
     private String nom;
-    /** primer cognom de l'escalador */
-    private String cognom1;
-    /** segon cognom de l'escalador */
-    private String cognom2;
+    /** cognoms de l'escalador */
+    private String cognoms;
     /** alias de l'escalador */
     private String alias;
     /** data de naixament de l'escalador */
     private LocalDate dataNaix;
     /** estil preferit (esportiva, clàssica, gel) */
-    private String estil;
+    private String estilPref;
 
     /** Constants */
     private static final String REGEX_DOC =
@@ -43,32 +41,30 @@ public class Escalador {
     /**
      * Constructor complet
      */
-    public Escalador(int idEscalador, String dni, String nom, String cognom1,
-                     String cognom2, String alias, LocalDate dataNaix, String estil) {
-        inicialitzar(idEscalador, dni, nom, cognom1, cognom2, alias, dataNaix, estil);
+    public Escalador(int idEscalador, String dni, String nom, String cognoms,
+                     String alias, LocalDate dataNaix, String estilPref) {
+        inicialitzar(idEscalador, dni, nom, cognoms, alias, dataNaix, estilPref);
     }
 
     /**
      * Constructor còpia
      */
     public Escalador(Escalador altre) {
-        inicialitzar(altre.idEscalador, altre.dni, altre.nom, altre.cognom1,
-                altre.cognom2, altre.alias, altre.dataNaix, altre.estil);
+        inicialitzar(altre.idEscalador, altre.dni, altre.nom, altre.cognoms,
+                altre.alias, altre.dataNaix, altre.estilPref);
     }
 
     /**
      * Mètode d'inicialització
      */
-    private void inicialitzar(int idEscalador, String dni, String nom, String cognom1,
-                              String cognom2, String alias, LocalDate dataNaix, String estil) {
+    private void inicialitzar(int idEscalador, String dni, String nom, String cognoms, String alias, LocalDate dataNaix, String estilPref) {
         setIdEscalador(idEscalador);
         setDni(dni);
         setNom(nom);
-        setCognom1(cognom1);
-        setCognom2(cognom2);
+        setCognoms(cognoms);
         setAlias(alias);
         setDataNaix(dataNaix);
-        setEstil(estil);
+        setEstilPref(estilPref);
     }
 
     /** SETTERS amb validació */
@@ -90,16 +86,10 @@ public class Escalador {
         this.nom = nom.trim(); //normalitzem nom
     }
 
-    public void setCognom1(String cognom1) {
-        if (cognom1 != null && cognom1.isBlank())
-            throw new IllegalArgumentException("Primer cognom no vàlid");
-        this.cognom1 = cognom1;
-    }
-
-    public void setCognom2(String cognom2) {
-        if (cognom2 != null && cognom2.isBlank())
-            throw new IllegalArgumentException("Segon cognom no vàlid");
-        this.cognom2 = cognom2;
+    public void setCognoms(String cognoms) {
+        if (cognoms != null && cognoms.isBlank())
+            throw new IllegalArgumentException("Cognoms no vàlids");
+        this.cognoms = cognoms;
     }
 
     public void setAlias(String alias) {
@@ -114,20 +104,20 @@ public class Escalador {
         this.dataNaix = dataNaix;
     }
 
-    public void setEstil(String estil) {
-        if (estil == null) {
-            this.estil = null;
+    public void setEstilPref(String estilPref) {
+        if (estilPref == null) {
+            this.estilPref = null;
             return;
         }
 
-        String e = estil.toLowerCase();
+        String e = estilPref.toLowerCase();
 
         if (!e.equals("esportiva") && !e.equals("clàssica")
                 && !e.equals("classica") && !e.equals("gel")) {
             throw new IllegalArgumentException("Estil no vàlid");
         }
         if (e.equals("classica")) e = "clàssica"; //normalitzem accent
-        this.estil = e;
+        this.estilPref = e;
     }
 
     /** GETTERS */
@@ -144,12 +134,8 @@ public class Escalador {
         return nom;
     }
 
-    public String getCognom1() {
-        return cognom1;
-    }
-
-    public String getCognom2() {
-        return cognom2;
+    public String getCognoms() {
+        return cognoms;
     }
 
     public String getAlias() {
@@ -160,17 +146,18 @@ public class Escalador {
         return dataNaix;
     }
 
-    public String getEstil() {
-        return estil;
+    public String getEstilPref() {
+        return estilPref;
     }
 
     /** toString */
     @Override
     public String toString() {
         return  "Nom: " + nom + "\n" +
+                "Cognoms: " + cognoms + "\n" +
                 "DNI: " + dni + "\n" +
                 "Alias: " + alias + "\n" +
-                "Estil: " + estil + "\n";
+                "Estil preferit: " + estilPref + "\n";
     }
 
     /** equals */
