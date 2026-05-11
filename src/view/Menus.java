@@ -29,6 +29,7 @@ public class Menus {
                 "Gestionar Vies",
                 "Gestionar Escaladors",
                 "Gestionar Llargs",
+                "Gestionar Assoliments",
                 "Consultes Avançades",
 
                 "Sortir"
@@ -147,6 +148,24 @@ public class Menus {
         };
 
         Vista.titol("GESTIÓ DE LLARGS");
+        Vista.mostrarMenu(opcions);
+    }
+
+    /**
+     * Mostrar el menu assoliments
+     */
+    public static void menuAssoliments() {
+        String[] opcions = {
+                "Registrar nou assoliment",
+                "Modificar dades d'un assoliment",
+                "Llistar assoliments d'un escalador",
+                "Llistar assoliments d'una via",
+                "Eliminar registre d'assoliment",
+                "Veure rànquing de nivell màxim",
+                "Tornar al menú principal"
+        };
+
+        Vista.titol("GESTIÓ D'ASSOLIMENTS (LOGS)");
         Vista.mostrarMenu(opcions);
     }
 

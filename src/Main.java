@@ -7,6 +7,9 @@ import model.Escola;
 import model.Sector;
 import model.Via;
 import model.Escalador;
+import model.Llarg;
+
+import java.util.List;
 
 /**
  * Classe principal que executa el bucle de l'aplicació.
@@ -40,7 +43,8 @@ public class Main {
                     case 3 -> gestionarVies(viaCtrl);
                     case 4 -> gestionarEscaladors(escaladorCtrl);
                     case 5 -> gestionarLlargs(llargCtrl);
-                    case 6 -> gestionarConsultesAvancades(escolaCtrl, viaCtrl, sectorCtrl, escaladorCtrl);
+                    case 6 -> gestionarAssoliments();
+                    case 7 -> gestionarConsultesAvancades(escolaCtrl, viaCtrl, sectorCtrl, escaladorCtrl);
                     case 0 -> Vista.info("Tancant connexions i sortint del sistema...");
                 }
             } catch (Exception e) {
@@ -286,9 +290,59 @@ public class Main {
         do {
             Menus.menuLlargs();
             opcio = InputReader.llegirOpcio("Escull una operació", 0, 6);
-            // Lògica per a llargs...
+
+            try {
+                switch (opcio) {
+                    case 1 -> {
+                        // Crear Llarg
+                        // InputReader.llegirLlarg() demana: ID via, ordre, llargada i dificultat
+                        Llarg nou = InputReader.llegirLlarg();
+                        ctrl.afegirLlarg(nou);
+                        Vista.ok("Llarg afegit correctament a la via.");
+                    }
+                    case 2 -> {
+                        // Modificar Llarg
+                        int id = InputReader.llegirInt("ID del llarg a modificar");
+                        Llarg existent = InputReader.llegirLlarg();
+                        existent.setIdLlarg(id);
+                        ctrl.actualitzar(existent);
+                        Vista.ok("Llarg actualitzat correctament.");
+                    }
+                    case 3 -> { // Llistar un Llarg (per ID)
+                        int id = InputReader.llegirInt("ID del llarg a consultar");
+                        List<Llarg> l = ctrl.obtenirPerId(id);
+                        if (l != null) {
+                            Vista.mostrarLn(l.toString());
+                        } else {
+                            Vista.error("No s'ha trobat cap llarg amb aquest ID.");
+                        }
+                    }
+                    case 4 -> { // Llistar tots els Llargs
+                        Vista.titol("LLISTAT GENERAL DE LLARGS");
+                        ctrl.obtenirTotes().forEach(l -> Vista.mostrarLn(l.toString()));
+                    }
+                    case 5 -> { // Eliminar Llarg
+                        int id = InputReader.llegirInt("ID del llarg a eliminar");
+                        if (InputReader.llegirBoolean("Estàs segur que vols eliminar aquest llarg?")) {
+                            ctrl.eliminar(id);
+                            Vista.ok("Llarg eliminat.");
+                        }
+                    }
+                    case 6 -> { // Veure llargs d'una Via específica
+                        int idVia = InputReader.llegirInt("Introdueix l'ID de la via");
+                        Vista.titol("LLARGS DE LA VIA ID: " + idVia);
+                        // Aquest mètode ha de retornar la llista filtrada des del DAO
+                        ctrl.obtenirPerVia(idVia).forEach(l -> Vista.mostrarLn(l.toString()));
+                    }
+                    case 0 -> Vista.info("Tornant al menú principal...");
+                }
+            } catch (Exception e) {
+                Vista.error("Error en la gestió de llargs: " + e.getMessage());
+            }
         } while (opcio != 0);
     }
+
+    private static void gestionarAssoliments(){}
 
     private static void gestionarConsultesAvancades(EscolaController e, ViaController v, SectorController s, EscaladorController esc) {
         int opcio;

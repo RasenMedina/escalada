@@ -53,7 +53,7 @@ public class Llarg {
 
     /** SETTERS amb validació */
 
-    private void setIdLlarg(int idLlarg) {
+    public void setIdLlarg(int idLlarg) {
         if (idLlarg < 0) throw new IllegalArgumentException("ID llarg no vàlid");
         this.idLlarg = idLlarg;
     }
