@@ -1,5 +1,8 @@
 package view;
 
+import controller.EscolaController;
+import model.Escola;
+
 /**
  * Classe encarregada de mostrar tots els menús de l'aplicació.
  *
@@ -54,7 +57,7 @@ public class Menus {
      *  Mostra el menú de gestió d'escoles.
      */
     // --- MENUS ESPECÍFICS (personalitzar el CRUD) ---
-    public static void menuEscoles() {
+    public static void menuEscoles(EscolaController controller) {
         String[] opcions = {
                 "Crear Escola",
                 "Modificar Escola",
@@ -80,7 +83,6 @@ public class Menus {
                 "Llistar un Sector (per ID)",
                 "Llistar tots els Sectors",
                 "Eliminar Sector",
-                "Mostrar sectors amb més de X vies",    // Requeriment avançat
 
                 "Tornar al menú principal"
         };

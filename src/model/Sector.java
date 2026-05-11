@@ -62,7 +62,7 @@ public class Sector {
 
     /** SETTERS amb validació */
 
-    private void setIdSector(int idSector) {
+    public void setIdSector(int idSector) {
         if (idSector < 0) throw new IllegalArgumentException("ID no vàlid");
         this.idSector = idSector;
     }

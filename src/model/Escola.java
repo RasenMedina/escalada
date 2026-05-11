@@ -53,7 +53,7 @@ public class Escola {
 
     /** SETTERS amb validació */
 
-    private void setIdEscola(int idEscola) {
+    public void setIdEscola(int idEscola) {
         if (idEscola < 0) throw new IllegalArgumentException("ID escola no vàlid");
         this.idEscola = idEscola;
     }
