@@ -406,7 +406,57 @@ public class Main {
         do {
             Menus.menuConsultesAvancades();
             opcio = InputReader.llegirOpcio("Escull consulta", 0, 8);
-            // Implementació de les consultes complexes descrites al README
+
+            try {
+                switch (opcio) {
+                    case 1 -> {
+                        // Vies disponibles d'una escola determinada
+                        int idEscola = InputReader.llegirInt("ID de l'escola");
+                        Vista.titol("VIES DISPONIBLES");
+                        e.getViesDisponibles(idEscola).forEach(v -> Vista.mostrarLn(v.toString()));
+                    }
+                    case 2 -> {
+                        // Cercar vies per rang de dificultat
+                        String min = InputReader.llegir("Dificultat mínima (ex: 5c)");
+                        String max = InputReader.llegir("Dificultat màxima (ex: 7a)");
+                        Vista.titol("VIES ENTRE " + min + " I " + max);
+                        v.getByRangDificultat(min, max).forEach(v -> Vista.mostrarLn(v.toString()));
+                    }
+                    case 3 -> { // Cercar vies segons estat
+                        String estat = InputReader.llegirEstatVia(); // "Apte", "Construcció", "Tancada"
+                        Vista.titol("VIES EN ESTAT: " + estat.toUpperCase());
+                        v.getByEstat(estat).forEach(v -> Vista.mostrarLn(v.toString()));
+                    }
+                    case 4 -> { // Consultar escoles amb restriccions actives
+                        Vista.titol("ESCOLES AMB RESTRICCIONS");
+                        // Nota: Cal que el mètode estigui al controlador
+                        esc.getAmbRestriccions().forEach(e -> Vista.mostrarLn(e.toString()));
+                    }
+                    case 5 -> { // Sectors amb més de X vies disponibles
+                        int minim = InputReader.llegirInt("Mínim de vies");
+                        Vista.titol("SECTORS AMB MÉS DE " + minim + " VIES");
+                        s.getSectorsAmbMesDeXVies(minim).forEach(s -> Vista.mostrarLn(s.toString()));
+                    }
+                    case 6 -> { // Escaladors amb el mateix nivell màxim assolit
+                        String nivell = InputReader.llegir("Introdueix nivell (ex: 6b)");
+                        Vista.titol("ESCALADORS DE NIVELL " + nivell);
+                        // Aquí fem servir la versió que calcula el nivell sense l'atribut nivellMaxim
+                        esc.getEscaladorsPerNivell(nivell).forEach(e -> Vista.mostrarLn(e.toString()));
+                    }
+                    case 7 -> { // Vies que han passat a 'Apte' recentment
+                        Vista.titol("VIES APTE RECENTMENT");
+                        v.getRecentmentAptes().forEach(v -> Vista.mostrarLn(v.toString()));
+                    }
+                    case 8 -> { // Les vies més llargues d'una escola
+                        int idEscola = InputReader.llegirInt("ID de l'escola");
+                        Vista.titol("VIES MÉS LLARGUES DE L'ESCOLA");
+                        esc.getViesMesLlargues(idEscola).forEach(v -> Vista.mostrarLn(v.toString()));
+                    }
+                    case 0 -> Vista.info("Tornant al menú principal...");
+                }
+            } catch (Exception e) {
+                Vista.error("Error en l'execució de la consulta: " + e.getMessage());
+            }
         } while (opcio != 0);
     }
 }
