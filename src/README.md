@@ -278,6 +278,10 @@ Regles:
 - Si la via està en 'Construcció' o 'Tancada'→ s'especifiquen les dates i el motiu
 Quan la data actual supera data_fi_no_apte, la via passa automàticament a Apte (controlat per lògica de negoci).
 
+Consideracions:
+- “Recentment” s’ha definit com vies que han recuperat l’estat ‘Apte’
+durant els últims 30 dies respecte la data actual.
+
 ---
 
 ### 9.6. Identificadors
@@ -417,7 +421,7 @@ Camps 'Not Null' per taula (els que es consideren mínims i imprescindibles)
 - Cerca per estat
 - Sectors amb més de X vies
 - Escaladors amb mateix nivell
-- Vies recentment disponibles
+- Vies recentment disponibles (últims 30 dies)
 - Vies més llargues d’una escola
 
 ---------------------------------

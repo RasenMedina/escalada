@@ -145,4 +145,32 @@ public class SectorDAOMySQL implements SectorDAO {
                 rs.getBoolean("es_gel")
         );
     }
+
+    @Override
+    public List<Sector> getSectorsAmbMesDeXVies(int minim) throws Exception {
+
+        List<Sector> llista = new ArrayList<>();
+
+        String sql = """
+        SELECT s.*
+        FROM sector s
+        INNER JOIN via v ON s.id_sector = v.id_sector
+        GROUP BY s.id_sector
+        HAVING COUNT(v.id_via) > ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, minim);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                llista.add(map(rs));
+            }
+        }
+
+        return llista;
+    }
 }

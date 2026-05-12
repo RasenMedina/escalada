@@ -54,4 +54,40 @@ public class ViaController {
         }
     }
 
+    public List<Via> getByRangDificultat(String min, String max) throws Exception {
+
+        if (min == null || min.isBlank()) {
+            throw new Exception("La dificultat mínima és obligatòria.");
+        }
+
+        if (max == null || max.isBlank()) {
+            throw new Exception("La dificultat màxima és obligatòria.");
+        }
+
+        return dao.getByRangDificultat(min, max);
+    }
+
+    public List<Via> getByEstat(String estat) throws Exception {
+
+        if (estat == null || estat.isBlank()) {
+            throw new Exception("L'estat no pot estar buit.");
+        }
+
+        return dao.getByEstat(estat);
+    }
+
+    public List<Via> getRecentmentAptes() throws Exception {
+
+        return dao.getRecentmentAptes();
+    }
+
+    public List<Via> getViesMesLlargues(int idEscola) throws Exception {
+
+        if (idEscola <= 0) {
+            throw new Exception("ID escola invàlid.");
+        }
+
+        return dao.getViesMesLlargues(idEscola);
+    }
+
 }

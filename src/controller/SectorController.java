@@ -53,4 +53,13 @@ public class SectorController {
             Vista.mostrarLn(s.toString());
         }
     }
+
+    public List<Sector> getSectorsAmbMesDeXVies(int minim) throws Exception {
+
+        if (minim < 0) {
+            throw new Exception("El mínim de vies no pot ser negatiu.");
+        }
+
+        return dao.getSectorsAmbMesDeXVies(minim);
+    }
 }

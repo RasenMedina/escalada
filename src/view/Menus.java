@@ -1,7 +1,6 @@
 package view;
 
 import controller.EscolaController;
-import model.Escola;
 
 /**
  * Classe encarregada de mostrar tots els menús de l'aplicació.
@@ -65,8 +64,6 @@ public class Menus {
                 "Llistar una Escola (per ID)",
                 "Llistar totes les Escoles",
                 "Eliminar Escola",
-                "Veure vies disponibles de l'escola", // Requeriment específic
-                "Veure les vies més llargues d'una escola", // Requeriment específic
 
                 "Tornar al menú principal"
         };
@@ -161,10 +158,11 @@ public class Menus {
                 "Llistar assoliments d'un escalador",
                 "Llistar assoliments d'una via",
                 "Eliminar registre d'assoliment",
+
                 "Tornar al menú principal"
         };
 
-        Vista.titol("GESTIÓ D'ASSOLIMENTS (LOGS)");
+        Vista.titol("GESTIÓ D'ASSOLIMENTS");
         Vista.mostrarMenu(opcions);
     }
 
@@ -188,8 +186,8 @@ public class Menus {
                 "Consultar escoles amb restriccions actives",
                 "Sectors amb més de X vies disponibles",
                 "Escaladors amb el mateix nivell màxim assolit",
-                "Vies que han passat a 'Apte' recentment",
-                "Les vies més llargues d'una escola",
+                "Vies que han passat a 'Apte' recentment (últims 30 dies)",
+                "Les vies més llargues d'una escola (5 més llargues)",
 
                 "Tornar al menú principal"
         };

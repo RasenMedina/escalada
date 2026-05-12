@@ -57,18 +57,18 @@ public class EscaladorController {
 
     /**
      * Obté una llista d'escaladors que tenen un nivell màxim assolit específic.
-     * @param nivell El nivell a cercar (ex: "6a", "7b+")
+     * @param grauDificultat El nivell a cercar (ex: "6a", "7b+")
      * @return Llista d'objectes Escalador
      * @throws Exception Si hi ha un error en la consulta a la BD
      */
-    public List<Escalador> getEscaladorsPerNivell(String nivell) throws Exception {
+    public List<Escalador> getEscaladorsPerNivell(String grauDificultat) throws Exception {
         // Validació bàsica
-        if (nivell == null || nivell.trim().isEmpty()) {
+        if (grauDificultat == null || grauDificultat.trim().isEmpty()) {
             throw new Exception("El nivell no pot estar buit.");
         }
 
         // Crida al mètode del DAO
-        return dao.getByNivell(nivell);
+        return dao.getByGrauDificultat(grauDificultat);
     }
 
 

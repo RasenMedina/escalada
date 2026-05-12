@@ -27,9 +27,9 @@ public class EscaladorDAOMySQL implements EscaladorDAO {
             ps.setString(1, e.getDni());
             ps.setString(2, e.getNom());
             ps.setString(3, e.getCognoms());
-            ps.setString(5, e.getAlias());
-            ps.setDate(6, e.getDataNaix() != null ? Date.valueOf(e.getDataNaix()) : null);
-            ps.setString(7, e.getEstilPref());
+            ps.setString(4, e.getAlias());
+            ps.setDate(5, e.getDataNaix() != null ? Date.valueOf(e.getDataNaix()) : null);
+            ps.setString(6, e.getEstilPref());
 
             ps.executeUpdate();
         }
@@ -93,10 +93,10 @@ public class EscaladorDAOMySQL implements EscaladorDAO {
 
             ps.setString(1, e.getNom());
             ps.setString(2, e.getCognoms());
-            ps.setString(4, e.getAlias());
-            ps.setDate(5, e.getDataNaix() != null ? Date.valueOf(e.getDataNaix()) : null);
-            ps.setString(6, e.getEstilPref());
-            ps.setInt(7, e.getIdEscalador());
+            ps.setString(3, e.getAlias());
+            ps.setDate(4, e.getDataNaix() != null ? Date.valueOf(e.getDataNaix()) : null);
+            ps.setString(5, e.getEstilPref());
+            ps.setInt(6, e.getIdEscalador());
 
             ps.executeUpdate();
         }
@@ -169,12 +169,53 @@ public class EscaladorDAOMySQL implements EscaladorDAO {
     }
 
     @Override
-    public List<Escalador> getByNivell(String nivell) throws Exception {
-        return List.of();
+    public List<Escalador> getByGrauDificultat(String grauDificultat) throws Exception {
+
+        List<Escalador> llista = new ArrayList<>();
+
+        String sql = """
+        SELECT DISTINCT e.*
+        FROM escalador e
+        INNER JOIN assoliment a ON e.id_escalador = a.id_escalador
+        INNER JOIN via v ON a.id_via = v.id_via
+        WHERE v.grau_dificultat = ?
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, grauDificultat);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                llista.add(mapEscalador(rs));
+            }
+        }
+
+        return llista;
     }
+
     @Override
     public List<Escalador> getByEstil(String estil) throws SQLException {
-       return List.of();
+
+        List<Escalador> llista = new ArrayList<>();
+
+        String sql = "SELECT * FROM escalador WHERE estil_pref = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, estil);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                llista.add(mapEscalador(rs));
+            }
+        }
+
+        return llista;
     }
 
 }

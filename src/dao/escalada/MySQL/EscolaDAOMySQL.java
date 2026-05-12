@@ -2,6 +2,7 @@ package dao.escalada.MySQL;
 
 import dao.escalada.EscolaDAO;
 import model.Escola;
+import model.Via;
 import util.DBConnection;
 
 import java.sql.*;
@@ -116,5 +117,66 @@ public class EscolaDAOMySQL implements EscolaDAO {
                 rs.getString("aproximacio"),
                 rs.getString("popularitat")
         );
+    }
+
+    @Override
+    public List<Via> getViesDisponibles(int idEscola) throws Exception {
+
+        List<Via> vies = new ArrayList<>();
+
+        String sql = """
+        SELECT v.*
+        FROM via v
+        INNER JOIN sector s ON v.id_sector = s.id_sector
+        WHERE s.id_escola = ?
+        AND v.estat = 'Apte'
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idEscola);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+
+                Via v = new Via();
+
+                v.setIdVia(rs.getInt("id_via"));
+                v.setNom(rs.getString("nom"));
+                v.setTipusVia(rs.getString("tipus"));
+                v.setEstat(rs.getString("estat"));
+
+                vies.add(v);
+            }
+        }
+
+        return vies;
+    }
+
+    @Override
+    public List<Escola> getAmbRestriccions() throws Exception {
+
+        List<Escola> escoles = new ArrayList<>();
+
+        String sql = """
+        SELECT DISTINCT e.*
+        FROM escola e
+        INNER JOIN sector s ON e.id_escola = s.id_escola
+        INNER JOIN via v ON s.id_sector = v.id_sector
+        WHERE v.estat <> 'Apte'
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                escoles.add(map(rs));
+            }
+        }
+
+        return escoles;
     }
 }

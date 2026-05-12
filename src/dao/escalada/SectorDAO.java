@@ -19,4 +19,9 @@ public interface SectorDAO extends DAO<Sector> {
      * Cercar sector per nom dins una escola
      */
     Sector getByNomAndEscola(String nom, int idEscola) throws Exception;
+
+    /**
+     * Cercar sectors amb més de x vies
+     */
+    List<Sector> getSectorsAmbMesDeXVies(int minim) throws Exception;
 }

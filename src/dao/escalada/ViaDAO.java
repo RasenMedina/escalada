@@ -34,4 +34,19 @@ public interface ViaDAO extends DAO<Via> {
      * Cercar via per nom dins un sector
      */
     Via getByNomAndSector(String nom, int idSector) throws Exception;
+
+    /**
+     * Cercar vies entre un rang de dificultat mínim i màxim
+     */
+    List<Via> getByRangDificultat(String min, String max) throws Exception;
+
+    /**
+     * Cercar vies que han passat a ser aptes recentment (últims 30 dies)
+     */
+    List<Via> getRecentmentAptes() throws Exception;
+
+    /**
+     * Cercar vies més llargues d'una escola en concret
+     */
+    List<Via> getViesMesLlargues(int idEscola) throws Exception;
 }

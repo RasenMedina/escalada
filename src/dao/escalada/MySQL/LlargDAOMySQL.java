@@ -13,13 +13,13 @@ public class LlargDAOMySQL implements LlargDAO {
     @Override
     public void create(Llarg l) throws Exception {
 
-        String sql = "INSERT INTO llarg (id_via, num, llargada, grau) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO llarg (id_via, ordre, llargada, grau_dificultat) VALUES (?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, l.getIdVia());
-            ps.setInt(2, l.getNum());
+            ps.setInt(2, l.getOrdre());
             ps.setInt(3, l.getLlargada());
             ps.setString(4, l.getGrauDificultat());
 
@@ -63,12 +63,12 @@ public class LlargDAOMySQL implements LlargDAO {
     @Override
     public void update(Llarg l) throws Exception {
 
-        String sql = "UPDATE llarg SET num=?, llargada=?, grau=? WHERE id_llarg=?";
+        String sql = "UPDATE llarg SET ordre=?, llargada=?, grau=? WHERE id_llarg=?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
-            ps.setInt(1, l.getNum());
+            ps.setInt(1, l.getOrdre());
             ps.setInt(2, l.getLlargada());
             ps.setString(3, l.getGrauDificultat());
             ps.setInt(4, l.getIdLlarg());
@@ -109,15 +109,15 @@ public class LlargDAOMySQL implements LlargDAO {
     }
 
     @Override
-    public Llarg getByViaAndNum(int idVia, int num) throws Exception {
+    public Llarg getByViaAndOrdre(int idVia, int ordre) throws Exception {
 
-        String sql = "SELECT * FROM llarg WHERE id_via=? AND num=?";
+        String sql = "SELECT * FROM llarg WHERE id_via=? AND ordre=?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
 
             ps.setInt(1, idVia);
-            ps.setInt(2, num);
+            ps.setInt(2, ordre);
 
             ResultSet rs = ps.executeQuery();
 
@@ -131,9 +131,9 @@ public class LlargDAOMySQL implements LlargDAO {
         return new Llarg(
                 rs.getInt("id_llarg"),
                 rs.getInt("id_via"),
-                rs.getInt("num"),
+                rs.getInt("ordre"),
                 rs.getInt("llargada"),
-                rs.getString("grau")
+                rs.getString("grau_dificultat")
         );
     }
 }

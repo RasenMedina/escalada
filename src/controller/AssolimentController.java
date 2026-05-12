@@ -2,8 +2,6 @@ package controller;
 
 import dao.escalada.AssolimentDAO;
 import model.Assoliment;
-import model.Escalador;
-import model.Llarg;
 
 import java.util.List;
 

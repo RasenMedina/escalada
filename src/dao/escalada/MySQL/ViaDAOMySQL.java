@@ -13,7 +13,7 @@ public class ViaDAOMySQL implements ViaDAO {
     @Override
     public void create(Via v) throws Exception {
 
-        String sql = "INSERT INTO via (id_sector, nom, id_escalador_creador, data_creacio, tipus, orientacio, grau, tipus_roca, ancoratge, estat, restriccions, data_inici_no_apte, data_fi_no_apte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO via (id_sector, nom, id_escalador_creador, data_creacio, tipus_via, orientacio, grau_dificultat, tipus_roca, ancoratge, estat, motiu_no_apte, data_inici_no_apte, data_fi_no_apte) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -28,7 +28,7 @@ public class ViaDAOMySQL implements ViaDAO {
             ps.setString(8, v.getTipusRoca());
             ps.setString(9, v.getAncoratge());
             ps.setString(10, v.getEstat());
-            ps.setString(11, v.getRestriccions());
+            ps.setString(11, v.getMotiuNoApte());
             ps.setDate(12, v.getDataIniciNoApte() != null ? Date.valueOf(v.getDataIniciNoApte()) : null);
             ps.setDate(13, v.getDataFiNoApte() != null ? Date.valueOf(v.getDataFiNoApte()) : null);
 
@@ -72,7 +72,7 @@ public class ViaDAOMySQL implements ViaDAO {
     @Override
     public void update(Via v) throws Exception {
 
-        String sql = "UPDATE via SET nom=?, tipus=?, orientacio=?, grau=?, tipus_roca=?, ancoratge=?, estat=? WHERE id_via=?";
+        String sql = "UPDATE via SET nom=?, tipus_via=?, orientacio=?, grau_dificultat=?, tipus_roca=?, ancoratge=?, estat=? WHERE id_via=?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -201,9 +201,9 @@ public class ViaDAOMySQL implements ViaDAO {
                 rs.getString("nom"),
                 rs.getInt("id_escalador_creador"),
                 rs.getDate("data_creacio") != null ? rs.getDate("data_creacio").toLocalDate() : null,
-                rs.getString("tipus"),
+                rs.getString("tipus_via"),
                 rs.getString("orientacio"),
-                rs.getString("grau"),
+                rs.getString("grau_dificultat"),
                 rs.getString("tipus_roca"),
                 rs.getString("ancoratge"),
                 rs.getString("estat"),
@@ -211,5 +211,91 @@ public class ViaDAOMySQL implements ViaDAO {
                 rs.getDate("data_inici_no_apte") != null ? rs.getDate("data_inici_no_apte").toLocalDate() : null,
                 rs.getDate("data_fi_no_apte") != null ? rs.getDate("data_fi_no_apte").toLocalDate() : null
         );
+    }
+
+    @Override
+    public List<Via> getByRangDificultat(String min, String max) throws Exception {
+
+        List<Via> llista = new ArrayList<>();
+
+        String sql = """
+        SELECT *
+        FROM via
+        WHERE grau_dificultat >= ?
+        AND grau_dificultat <= ?
+        ORDER BY grau_dificultat
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, min);
+            ps.setString(2, max);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                llista.add(map(rs));
+            }
+        }
+
+        return llista;
+    }
+
+    @Override
+    public List<Via> getRecentmentAptes() throws Exception {
+
+        List<Via> llista = new ArrayList<>();
+
+        String sql = """
+        SELECT *
+        FROM via
+        WHERE estat = 'Apte'
+        AND data_fi_no_apte IS NOT NULL
+        AND data_fi_no_apte >= DATE_SUB(CURDATE(), INTERVAL 30 DAY)
+        ORDER BY data_fi_no_apte DESC
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             Statement st = conn.createStatement();
+             ResultSet rs = st.executeQuery(sql)) {
+
+            while (rs.next()) {
+                llista.add(map(rs));
+            }
+        }
+
+        return llista;
+    }
+
+    @Override
+    public List<Via> getViesMesLlargues(int idEscola) throws Exception {
+
+        List<Via> llista = new ArrayList<>();
+
+        String sql = """
+        SELECT v.*
+        FROM via v
+        INNER JOIN sector s ON v.id_sector = s.id_sector
+        INNER JOIN llarg l ON v.id_via = l.id_via
+        WHERE s.id_escola = ?
+        GROUP BY v.id_via
+        ORDER BY SUM(l.llargada) DESC
+        LIMIT 5
+    """;
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, idEscola);
+
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                llista.add(map(rs));
+            }
+        }
+
+        return llista;
     }
 }

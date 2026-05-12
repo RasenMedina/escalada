@@ -1,11 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="ArtifactsWorkspaceSettings">
+    <artifacts-to-build>
+      <artifact name="PracticaPersistencia:jar" />
+    </artifacts-to-build>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d6354abf-d982-4a4b-b95c-e1b2e0154260" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/PracticaPersistencia.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PracticaPersistencia.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Cambios.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/src/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/AssolimentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/AssolimentController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/EscaladorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/EscaladorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/EscolaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/EscolaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/SectorController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/SectorController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controller/ViaController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/ViaController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/EscaladorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/EscaladorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/EscolaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/EscolaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/LlargDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/LlargDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/MySQL/EscaladorDAOMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/MySQL/EscaladorDAOMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/MySQL/EscolaDAOMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/MySQL/EscolaDAOMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/MySQL/LlargDAOMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/MySQL/LlargDAOMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/MySQL/SectorDAOMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/MySQL/SectorDAOMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/MySQL/ViaDAOMySQL.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/MySQL/ViaDAOMySQL.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/SectorDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/SectorDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/dao/escalada/ViaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/dao/escalada/ViaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/images/menu_principal.png" beforeDir="false" afterPath="$PROJECT_DIR$/src/images/menu_principal.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/input/InputReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/input/InputReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/util/DBConnection.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/util/DBConnection.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/view/Menus.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/view/Menus.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,23 +61,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/RASEN/Desktop/Rasen/0Now/DAW_SaPalomera/9PersistenciaDades/PracticaPersistencia&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/RASEN/Desktop/Rasen/0Now/DAW_SaPalomera/9PersistenciaDades/PracticaPersistencia/escalada/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.Mappings&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.Main.executor": "Run",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/RASEN/Desktop/Rasen/0Now/DAW_SaPalomera/9PersistenciaDades/PracticaPersistencia",
+    "onboarding.tips.debug.path": "C:/Users/RASEN/Desktop/Rasen/0Now/DAW_SaPalomera/9PersistenciaDades/PracticaPersistencia/escalada/src/Main.java",
+    "project.structure.last.edited": "Artifacts",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\RASEN\Desktop\Rasen\0Now\DAW_SaPalomera\9PersistenciaDades\PracticaPersistencia\escalada\src\dao\PostgresSQL" />

@@ -2,6 +2,7 @@ package controller;
 
 import dao.escalada.EscolaDAO;
 import model.Escola;
+import model.Via;
 import view.Vista;
 
 import java.util.List;
@@ -53,5 +54,19 @@ public class EscolaController {
         for (Escola e : escoles) {
             Vista.mostrarLn(e.toString());
         }
+    }
+
+    public List<Via> getViesDisponibles(int idEscola) throws Exception {
+
+        if (idEscola <= 0) {
+            throw new Exception("ID escola invàlid.");
+        }
+
+        return dao.getViesDisponibles(idEscola);
+    }
+
+    public List<Escola> getAmbRestriccions() throws Exception {
+
+        return dao.getAmbRestriccions();
     }
 }

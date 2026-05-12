@@ -19,11 +19,12 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
+
         // Configuració inicial de la vista
         Vista.setMode(Vista.MODE_CONSOLA);
         Vista.titol("BENVINGUTS A L'APLICACIÓ D'ESCALADA JDBC");
 
-        // Inicialització dels DAOs i Controladors
+        // Inicialització dels DAO's i Controladors
         EscolaController escolaCtrl = new EscolaController(new EscolaDAOMySQL());
         SectorController sectorCtrl = new SectorController(new SectorDAOMySQL());
         ViaController viaCtrl = new ViaController(new ViaDAOMySQL());
@@ -35,7 +36,7 @@ public class Main {
 
         do {
             Menus.menuPrincipal();
-            opcioPrincipal = InputReader.llegirOpcio("Selecciona una secció", 0, 6);
+            opcioPrincipal = InputReader.llegirOpcio("Selecciona una secció", 0, 7);
 
             try {
                 switch (opcioPrincipal) {
@@ -268,7 +269,7 @@ public class Main {
                         }
                     }
                     case 6 -> {
-                        // Mostrar escaladors amb el mateix nivell (Requeriment avançat)
+                        // Mostrar escaladors amb el mateix nivell (Requisit avançat)
                         String nivell = InputReader.llegir("Introdueix el nivell a cercar (ex: 6a)");
                         Vista.titol("ESCALADORS AMB NIVELL " + nivell);
                         ctrl.getEscaladorsPerNivell(nivell).forEach(e -> Vista.mostrarLn(e.toString()));
@@ -413,49 +414,49 @@ public class Main {
                         // Vies disponibles d'una escola determinada
                         int idEscola = InputReader.llegirInt("ID de l'escola");
                         Vista.titol("VIES DISPONIBLES");
-                        e.getViesDisponibles(idEscola).forEach(v -> Vista.mostrarLn(v.toString()));
+                        e.getViesDisponibles(idEscola).forEach(v1 -> Vista.mostrarLn(v1.toString()));
                     }
                     case 2 -> {
                         // Cercar vies per rang de dificultat
                         String min = InputReader.llegir("Dificultat mínima (ex: 5c)");
                         String max = InputReader.llegir("Dificultat màxima (ex: 7a)");
                         Vista.titol("VIES ENTRE " + min + " I " + max);
-                        v.getByRangDificultat(min, max).forEach(v -> Vista.mostrarLn(v.toString()));
+                        v.getByRangDificultat(min, max).forEach(v2 -> Vista.mostrarLn(v2.toString()));
                     }
                     case 3 -> { // Cercar vies segons estat
                         String estat = InputReader.llegirEstatVia(); // "Apte", "Construcció", "Tancada"
                         Vista.titol("VIES EN ESTAT: " + estat.toUpperCase());
-                        v.getByEstat(estat).forEach(v -> Vista.mostrarLn(v.toString()));
+                        v.getByEstat(estat).forEach(v3 -> Vista.mostrarLn(v3.toString()));
                     }
                     case 4 -> { // Consultar escoles amb restriccions actives
                         Vista.titol("ESCOLES AMB RESTRICCIONS");
                         // Nota: Cal que el mètode estigui al controlador
-                        esc.getAmbRestriccions().forEach(e -> Vista.mostrarLn(e.toString()));
+                        e.getAmbRestriccions().forEach(e1 -> Vista.mostrarLn(e1.toString()));
                     }
                     case 5 -> { // Sectors amb més de X vies disponibles
                         int minim = InputReader.llegirInt("Mínim de vies");
                         Vista.titol("SECTORS AMB MÉS DE " + minim + " VIES");
-                        s.getSectorsAmbMesDeXVies(minim).forEach(s -> Vista.mostrarLn(s.toString()));
+                        s.getSectorsAmbMesDeXVies(minim).forEach(s1 -> Vista.mostrarLn(s1.toString()));
                     }
                     case 6 -> { // Escaladors amb el mateix nivell màxim assolit
                         String nivell = InputReader.llegir("Introdueix nivell (ex: 6b)");
                         Vista.titol("ESCALADORS DE NIVELL " + nivell);
                         // Aquí fem servir la versió que calcula el nivell sense l'atribut nivellMaxim
-                        esc.getEscaladorsPerNivell(nivell).forEach(e -> Vista.mostrarLn(e.toString()));
+                        esc.getEscaladorsPerNivell(nivell).forEach(esc1 -> Vista.mostrarLn(esc1.toString()));
                     }
                     case 7 -> { // Vies que han passat a 'Apte' recentment
-                        Vista.titol("VIES APTE RECENTMENT");
-                        v.getRecentmentAptes().forEach(v -> Vista.mostrarLn(v.toString()));
+                        Vista.titol("VIES APTE RECENTMENT (ÚLTIMS 30 DIES)");
+                        v.getRecentmentAptes().forEach(v4 -> Vista.mostrarLn(v4.toString()));
                     }
                     case 8 -> { // Les vies més llargues d'una escola
                         int idEscola = InputReader.llegirInt("ID de l'escola");
-                        Vista.titol("VIES MÉS LLARGUES DE L'ESCOLA");
-                        esc.getViesMesLlargues(idEscola).forEach(v -> Vista.mostrarLn(v.toString()));
+                        Vista.titol("VIES MÉS LLARGUES DE L'ESCOLA (5 més llargues)");
+                        v.getViesMesLlargues(idEscola).forEach(v5 -> Vista.mostrarLn(v5.toString()));
                     }
                     case 0 -> Vista.info("Tornant al menú principal...");
                 }
-            } catch (Exception e) {
-                Vista.error("Error en l'execució de la consulta: " + e.getMessage());
+            } catch (Exception error) {
+                Vista.error("Error en l'execució de la consulta: " + error.getMessage());
             }
         } while (opcio != 0);
     }

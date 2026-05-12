@@ -18,5 +18,5 @@ public interface LlargDAO extends DAO<Llarg> {
     /**
      * Obtenir un llarg concret dins d'una via
      */
-    Llarg getByViaAndNum(int idVia, int num) throws Exception;
+    Llarg getByViaAndOrdre(int idVia, int ordre) throws Exception;
 }

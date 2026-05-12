@@ -106,255 +106,170 @@ public class InputReader {
     }
 
     /**
-     * Llegeix la popularitat tot validant-la
+     * Llegeix l'estat d'una via
      */
-    public static String llegirPopularitat() {
-
-        while (true) {
-
-            String p = llegir("Popularitat (baixa, mitjana, alta)").toLowerCase();
-
-            if (p.matches("baixa|mitjana|alta")) {
-                return p;
-            }
-
-            Vista.error("Popularitat no vàlida");
-        }
+    public static String llegirEstatVia() {
+        return llegir("Estat (apte/construccio/tancada)");
     }
 
-    /**
-     * Llegeix l'orientació tot validant-la
-     */
-    public static String llegirOrientacio() {
-
-        while (true) {
-
-            String o = llegir("Orientació (N, NE, NO, E, O, S, SE, SO)").toUpperCase();
-
-            if (o.matches("N|NE|NO|E|O|S|SE|SO")) {
-                return o;
-            }
-
-            Vista.error("Orientació incorrecta");
-        }
-    }
+// -------------------- ENTITATS --------------------
 
     /**
-     * Llegeix el tipus de via tot validant-la
-     */
-    public static String llegirTipusVia() {
-
-        while (true) {
-
-            String tipus = llegir("Tipus (esportiva, classica, gel)").toLowerCase();
-
-            if (tipus.matches("esportiva|classica|gel")) {
-                return tipus;
-            }
-
-            Vista.error("Tipus incorrecte");
-        }
-    }
-
-    /**
-     * Llegeix el grau de dificultat tot validant-lo mitjançant el tipus de via
-     */
-    public static String llegirGrauDificultat(String tipusVia) {
-
-        while (true) {
-
-            String grau = llegir("Grau dificultat").toLowerCase();
-
-            if (tipusVia.equals("esportiva")) {
-
-                if (grau.matches("4\\+?|5\\+?|6[abc]?\\+?|7[abc]?\\+?|8[abc]?\\+?|9[abc]?\\+?")) {
-                    return grau;
-                }
-            }
-
-            if (tipusVia.equals("classica") || tipusVia.equals("gel")) {
-
-                if (grau.matches("4\\+?|5\\+?|6[abc]?\\+?|7[abc]?\\+?|8[ab]?\\+?")) {
-                    return grau;
-                }
-            }
-
-            Vista.error("Grau no vàlid pel tipus de via");
-        }
-    }
-
-    /**
-     * Llegeix una Escola per teclat tot validant les seves dades
+     * Llegeix una escola per teclat
      */
     public static Escola llegirEscola() {
-
         while (true) {
-
             try {
-
                 Escola e = new Escola();
 
+                e.setIdEscola(llegirInt("ID escola"));
                 e.setNom(llegir("Nom escola"));
                 e.setLloc(llegir("Població"));
-                e.setPopularitat(llegirPopularitat());
+                e.setPopularitat(llegir("Popularitat"));
                 e.setAproximacio(llegir("Aproximació"));
-
                 return e;
-
-            } catch (Exception ex) {
-                Vista.error("Error creant escola");
+            } catch (Exception e) {
+                Vista.error(e.getMessage());
             }
         }
     }
 
     /**
-     * Llegeix un sector per teclat tot validant les seves dades
+     * Llegeix un sector per teclat
      */
     public static Sector llegirSector() {
-
         while (true) {
-
             try {
-
                 Sector s = new Sector();
 
+                s.setIdSector(llegirInt("ID sector"));
                 s.setIdEscola(llegirInt("ID escola"));
                 s.setNom(llegir("Nom sector"));
                 s.setLatitud(llegirDouble("Latitud"));
                 s.setLongitud(llegirDouble("Longitud"));
                 s.setAproximacio(llegir("Aproximació"));
-                s.setPopularitat(llegirPopularitat());
+                s.setPopularitat(llegir("Popularitat"));
                 s.setEsGel(llegirBoolean("És sector de gel?"));
-
                 return s;
-
             } catch (Exception e) {
-                Vista.error("Error creant sector");
+                Vista.error(e.getMessage());
             }
         }
     }
 
     /**
-     * Llegeix una via per teclat tot validant les seves dades
+     * Llegeix una via per teclat
      */
     public static Via llegirVia() {
 
         while (true) {
-
             try {
-
                 Via v = new Via();
+
+                // PK
+                v.setIdVia(llegirInt("ID via"));
 
                 v.setIdSector(llegirInt("ID sector"));
                 v.setIdEscaladorCreador(llegirInt("ID escalador creador"));
+
                 v.setNom(llegir("Nom via"));
 
-                String tipus = llegirTipusVia();
-                v.setTipusVia(tipus);
+                v.setDataCreacio(llegirData("Data de creació"));
 
-                v.setOrientacio(llegirOrientacio());
+
+                // Només llegim string, validació al setter
+                v.setTipusVia(llegir("Tipus via (esportiva/classica/gel)"));
+                v.setGrauDificultat(llegir("Grau de dificultat"));
                 v.setAncoratge(llegir("Ancoratge"));
+                v.setOrientacio(llegir("Orientació"));
                 v.setTipusRoca(llegir("Tipus roca"));
-                v.setEstat(llegir("Estat"));
+
+                // Estat amb lògica condicional
+                String estat = llegir("Estat (apte/construccio/tancada)");
+                v.setEstat(estat);
+
+                if (!estat.equalsIgnoreCase("apte")) {
+                    v.setMotiuNoApte(llegir("Motiu no apte"));
+                    v.setDataIniciNoApte(llegirData("Data inici no apte"));
+                    v.setDataFiNoApte(llegirData("Data fi no apte"));
+                } else {
+                    v.setMotiuNoApte(null);
+                    v.setDataIniciNoApte(null);
+                    v.setDataFiNoApte(null);
+                }
 
                 return v;
 
             } catch (Exception e) {
-                Vista.error("Error creant via");
+                Vista.error(e.getMessage());
             }
         }
     }
 
     /**
-     * Llegeix l'estat d'una via tot validant-lo
-     */
-    public static String llegirEstatVia() {
-
-        while (true) {
-
-            String estat = llegir("Estat (apte, construccio, tancada)").toLowerCase();
-
-            if (estat.matches("apte|construccio|tancada")) {
-                return estat;
-            }
-
-            Vista.error("Estat no vàlid");
-        }
-    }
-
-    /**
-     * Llegeix un escalador per teclat tot validant les seves dades
+     * Llegeix un escalador per teclat
      */
     public static Escalador llegirEscalador() {
-
         while (true) {
-
             try {
-
                 Escalador e = new Escalador();
 
+                e.setIdEscalador(llegirInt("ID escalador"));
                 e.setDni(llegir("DNI"));
                 e.setNom(llegir("Nom"));
                 e.setCognoms(llegir("Cognoms"));
                 e.setAlias(llegir("Àlies"));
-                e.setDataNaix(llegirData("Data naixement (yyyy-MM-dd)"));
+                e.setDataNaix(llegirData("Data naixement"));
                 e.setEstilPref(llegir("Estil preferit"));
 
                 return e;
 
             } catch (Exception ex) {
-
                 Vista.error(ex.getMessage());
             }
         }
     }
 
     /**
-     * Llegeix un llarg per teclat tot validant les seves dades
+     * Llegeix un llarg per teclat
      */
     public static Llarg llegirLlarg() {
-
         while (true) {
-
             try {
-
                 Llarg l = new Llarg();
 
+                l.setIdLlarg(llegirInt("ID llarg"));
                 l.setIdVia(llegirInt("ID via"));
-                l.setOrdre(llegirInt("Ordre del llarg"));
+                l.setOrdre(llegirInt("Ordre"));
                 l.setLlargada(llegirInt("Llargada"));
                 l.setGrauDificultat(llegir("Grau dificultat"));
 
                 return l;
 
-            } catch (Exception ex) {
-                Vista.error(ex.getMessage());
+            } catch (Exception e) {
+                Vista.error(e.getMessage());
             }
         }
     }
 
     /**
-     * Llegeix un assoliment pert teclat tot validant les seves dades
+     * Llegeix un assoliment per teclat
      */
     public static Assoliment llegirAssoliment() {
-
         while (true) {
-
             try {
-
                 Assoliment a = new Assoliment();
 
+                a.setIdAssoliment(llegirInt("ID assoliment"));
                 a.setIdEscalador(llegirInt("ID escalador"));
                 a.setIdVia(llegirInt("ID via"));
-                a.setDataAssoliment(llegirData("Data assoliment (yyyy-MM-dd)"));
+                a.setDataAssoliment(llegirData("Data assoliment"));
 
                 return a;
 
-            } catch (Exception ex) {
-
-                Vista.error(ex.getMessage());
+            } catch (Exception e) {
+                Vista.error(e.getMessage());
             }
         }
     }
-
 }

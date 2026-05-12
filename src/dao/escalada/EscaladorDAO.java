@@ -17,9 +17,9 @@ public interface EscaladorDAO extends DAO<Escalador> {
     Escalador getByDni(String dni) throws Exception;
 
     /**
-     * Get by nivell
+     * Llista dels escaladors que han fet almenys una via amb aquest grau de dificultat
      */
-    List<Escalador> getByNivell(String nivell) throws Exception;
+    List<Escalador> getByGrauDificultat(String grauDificultat) throws Exception;
 
     /**
      * Get by estil preferit
